@@ -19,6 +19,16 @@
                 <%= f.submit "share", class: "btn btn-primary" %>
             <% end %>
            <% end %>
+           <%= micropost.mlikes.count %> Likes
+           <% if !current_user?(micropost.user) %>
+           <% mlike = current_user.mlikes.find_by(micropost: micropost) %>
+           <%if  mlike.nil? %>
+           <%= button_to "Like", mlikes_path, params: { mlike: {micropost_id: micropost.id}}, method: :post %>
+           <% else %>
+           <%= button_to "Unlike", mlike_path(mlike), method: :delete %>
+           <% end %>
+
+           <% end %>
     
     
 </li>
