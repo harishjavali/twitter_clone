@@ -5,11 +5,20 @@
         <%= micropost.content %>
         <%= image_tag micropost.display_image if micropost.image.attached? %>
     </span>
+
     <span class="timestamp">
         Posted <%= time_ago_in_words(micropost.created_at) %> ago.
         <% if current_user?(micropost.user) %>
         <%= link_to "delete", micropost, method: :delete,   
                                                     data: { confirm: "You sure?" } %>
         <% end %>
-    </span>
+        </span>
+        <% if !current_user?(micropost.user) %>  
+            <%= form_with(model: @micropost, url: microposts_share_path, local: true) do |f| %>
+                <%= hidden_field_tag :share_id, micropost.id  %>
+                <%= f.submit "share", class: "btn btn-primary" %>
+            <% end %>
+           <% end %>
+    
+    
 </li>

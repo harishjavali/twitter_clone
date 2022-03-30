@@ -13,6 +13,15 @@ class MicropostsController < ApplicationController
         end
     end
 
+    def share
+        @micropost = current_user.microposts.build(content: Micropost.find(params[:share_id]).content)
+        if @micropost.save
+            redirect_to current_user
+        else
+            redirect_to root_url
+        end
+    end
+
     def destroy
         @micropost.destroy
         flash[:success] = "Micropost deleted"

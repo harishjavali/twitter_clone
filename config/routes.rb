@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new'
   get '/login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
+  
   delete '/logout', to: 'sessions#destroy'
   # get '/microposts', to: 'static_pages#home'
   resources :users do
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
+  post 'microposts/share', to: 'microposts#share'
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :microposts, only: [:create, :destroy]
