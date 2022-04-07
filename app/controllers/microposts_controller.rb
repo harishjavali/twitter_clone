@@ -12,6 +12,7 @@ class MicropostsController < ApplicationController
             render 'static_pages/home'
         end
     end
+    
 
     def share
         @micropost = current_user.microposts.build(content: Micropost.find(params[:share_id]).content)

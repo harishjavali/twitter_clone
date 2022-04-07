@@ -6,6 +6,6 @@ class CreateMlikes < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-      add_index :mlikes, [:user_id, :micropost_id], unique: true
+     
   end
 end

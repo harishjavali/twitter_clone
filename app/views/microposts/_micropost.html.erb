@@ -20,6 +20,10 @@
             <% end %>
            <% end %>
            <%= micropost.mlikes.count %> Likes
+           <%= form_with(model: @mlike, url: mlikes_show_path, local: true) do |f| %>
+            <%= hidden_field_tag :viewlike_id, micropost.id  %>
+            <%= f.submit "View_likes", class: "btn btn-primary" %>
+            <% end %>
            <% if !current_user?(micropost.user) %>
            <% mlike = current_user.mlikes.find_by(micropost: micropost) %>
            <%if  mlike.nil? %>
@@ -27,7 +31,7 @@
            <% else %>
            <%= button_to "Unlike", mlike_path(mlike), method: :delete %>
            <% end %>
-
+                
            <% end %>
     
     
